@@ -1,5 +1,12 @@
 {
-  "name": "forms_bloque_4",
+  "name": "bootstrap_bloque_5",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:HackAcademy/intro_bootstrap_bloque_5.git",
+  "author": "Carlos Torrealba <calrrox@gmail.com>",
+  "license": "MIT"
 }
