@@ -1,19 +1,16 @@
 %h1 New person
-%br/
-
 .row
   .col-xs-12
     = form_with model: @person, local: true do |form|
       - if @person.errors.any?
-        #error_explanation
-          %h2
-            = pluralize(@person.errors.count, "error")
-            prohibited this person from being saved:
+        .alert.alert-danger
+          = pluralize(@person.errors.count, "error")
+          prohibited this person from being saved:
           %ul
             - @person.errors.full_messages.each do |message|
               %li= message
       .row
-        .col-xs-6
+        .col-xs-12.col-md-6.col-lg-4
           .form-group
             = form.file_field :avatar
           .form-group
@@ -34,7 +31,7 @@
             %label
               = form.radio_button :alien, false
               no
-        .col-xs-6
+        .col-xs-12.col-md-6-col-lg-8
           %h4 Hobbies
           = form.fields_for :hobbies do |hobby|
             .form-group
@@ -43,7 +40,7 @@
                 = hobby.text_field :name, class: 'form-control '
                 = hobby.select :kind, @kinds, {}, class: 'form-control'
       .row
-        .col-xs-6
-          = link_to 'Back', people_path, class: 'btn btn-warning'
-        .col-xs-6.text-right
-          = form.submit class: 'btn btn-primary'
+        .hidden-xs.col-md-6
+          = link_to 'Back', people_path, class: 'btn btn-warning btn-block'
+        .col-xs-12.col-md-6
+          = form.submit class: 'btn btn-primary btn-block'
