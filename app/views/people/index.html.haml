@@ -1,0 +1,32 @@
+%h1 People
+= form_with url: people_path, method: :get, local: true do |form|
+  = form.label :search
+  = form.text_field :query
+  = form.submit 'go'
+%br/
+%table
+  %thead
+    %tr
+      %th Name
+      %th Age
+      %th Gender
+      %th Alien?
+  %tbody
+  - @people.each do |person|
+    %tr
+      %td
+        = person.name
+      %td
+        = person.age
+      %td
+        = person.gender
+      %td
+        = humanize_boolean(person.alien)
+      %td
+        = link_to 'Show', person_path(person)
+        = link_to 'Edit', edit_person_path(person)
+        = link_to 'Destroy', person_path(person), method: :delete, data: {confirm: 'Are you sure?'}
+
+%br/
+= link_to 'New Person', new_person_path
+

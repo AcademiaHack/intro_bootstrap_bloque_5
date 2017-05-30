@@ -1,0 +1,13 @@
+%h1 [#{@person.name}] new hobby
+%br/
+
+= form_with model: [@person, @hobby], local: true do |form|
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :kind
+    = form.select :kind, options_for_select(@kinds)
+  = form.submit
+%br/
+= link_to 'Back', person_path(@person)

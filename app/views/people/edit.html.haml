@@ -1,0 +1,26 @@
+%h1 Edit #{@person.name}
+%br/
+
+= form_with model: @person, local: true do |form|
+  .field
+    = form.label :name
+    %input{type: :text, name: 'person[name]', id: :person_name, value: form.object.name}
+  .field
+    = form.label :age
+    = form.number_field :age
+  .field
+    = form.label :gender
+    = form.select :gender, [['male', 'Male'], ['female', 'Famale']]
+  .field
+    = form.label :alien
+    .field
+      = form.label :yes
+      = form.radio_button :alien, true
+    .field
+      = form.label :no
+      = form.radio_button :alien, false
+  %br/
+  = form.submit
+= link_to 'Back', people_path
+
+

@@ -1,0 +1,39 @@
+%p{id:"notice"}
+  = notice
+
+%h1 #{@person.name}
+%div
+  = image_tag @person.avatar.url(:thumb)
+
+%ul
+  %li
+    %strong
+      Age:
+    #{@person.age}
+  %li
+    %strong
+      Gender:
+    #{@person.gender}
+  %li
+    %strong
+      Alien:
+    #{@person.alien}
+= link_to 'Back', people_path
+= link_to 'New Hobbie', new_person_hobby_path(@person)
+
+- if @person.hobbies.present?
+  %h2 Hobbies
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Kind
+    %tbody
+    - @person.hobbies.each do |hobby|
+      %tr
+        %td
+          = hobby.name
+        %td
+          = hobby.kind
+        %td
+          = link_to 'Destroy', hobby_path(hobby), method: :delete, data: {confirm: 'Are you sure?'}
