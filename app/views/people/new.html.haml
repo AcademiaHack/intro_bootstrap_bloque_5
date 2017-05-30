@@ -1,44 +1,49 @@
 %h1 New person
 %br/
 
-= form_with model: @person, local: true do |form|
-  - if @person.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@person.errors.count, "error")
-        prohibited this person from being saved:
-      %ul
-        - @person.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = form.file_field :avatar
-  .field
-    = form.label :name
-    %input{type: :text, name: 'person[name]'}
-  .field
-    = form.label :age
-    = form.number_field :age
-  .field
-    = form.label :gender
-    = form.select :gender, [['Male', 'male'], ['Female', 'famale']]
-  .field
-    = form.label :alien
-    .field
-      = form.label :yes
-      = form.radio_button :alien, true
-    .field
-      = form.label :no
-      = form.radio_button :alien, false
-    %h4 Hobbies
-    %ul
-      = form.fields_for :hobbies do |hobby|
-        %li
-          .field
-            = hobby.label :name
-            = hobby.text_field :name
-          .field
-            = hobby.label :kind
-            = hobby.select :kind, @kinds
-  %br/
-  = form.submit
-= link_to 'Back', people_path
+.row
+  .col-xs-12
+    = form_with model: @person, local: true do |form|
+      - if @person.errors.any?
+        #error_explanation
+          %h2
+            = pluralize(@person.errors.count, "error")
+            prohibited this person from being saved:
+          %ul
+            - @person.errors.full_messages.each do |message|
+              %li= message
+      .row
+        .col-xs-6
+          .form-group
+            = form.file_field :avatar
+          .form-group
+            = form.label :name
+            %input{type: :text, name: 'person[name]', class: 'form-control'}
+          .form-group
+            = form.label :age
+            = form.number_field :age, class: 'form-control'
+          .form-group
+            = form.label :gender
+            = form.select :gender, [['Male', 'male'], ['Female', 'famale']], {}, class: 'form-control'
+          = form.label :alien
+          .radio
+            %label
+              = form.radio_button :alien, true
+              yes
+          .radio
+            %label
+              = form.radio_button :alien, false
+              no
+        .col-xs-6
+          %h4 Hobbies
+          = form.fields_for :hobbies do |hobby|
+            .form-group
+              = hobby.label :name, "Name | Kind"
+              .form-inline
+                = hobby.text_field :name, class: 'form-control '
+                = hobby.select :kind, @kinds, {}, class: 'form-control'
+      .row
+        .col-xs-6
+          = link_to 'Back', people_path, class: 'btn btn-warning'
+        .col-xs-6.text-right
+          = form.submit class: 'btn btn-primary'

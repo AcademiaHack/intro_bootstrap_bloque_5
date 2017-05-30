@@ -1,32 +1,35 @@
-%h1 People
-= form_with url: people_path, method: :get, local: true do |form|
-  = form.label :search
-  = form.text_field :query
-  = form.submit 'go'
-%br/
-%table
-  %thead
-    %tr
-      %th Name
-      %th Age
-      %th Gender
-      %th Alien?
-  %tbody
-  - @people.each do |person|
-    %tr
-      %td
-        = person.name
-      %td
-        = person.age
-      %td
-        = person.gender
-      %td
-        = humanize_boolean(person.alien)
-      %td
-        = link_to 'Show', person_path(person)
-        = link_to 'Edit', edit_person_path(person)
-        = link_to 'Destroy', person_path(person), method: :delete, data: {confirm: 'Are you sure?'}
-
-%br/
-= link_to 'New Person', new_person_path
-
+.row
+  .col-xs-12
+    %h1 People
+  .col-xs-12.text-right
+    = form_with url: people_path, method: :get, local: true, class: 'form-inline' do |form|
+      .form-group
+        = form.label :search
+        = form.text_field :query, class: 'form-control'
+        = form.submit 'go', class: 'btn btn-primary'
+  .col-xs-12
+    %table.table
+      %thead
+        %tr
+          %th Name
+          %th Age
+          %th Gender
+          %th Alien?
+      %tbody
+      - @people.each do |person|
+        %tr{class: "#{alien?(person)}"}
+          %td
+            = person.name
+          %td
+            = person.age
+          %td
+            = person.gender
+          %td
+            = humanize_boolean(person.alien)
+          %td.text-right
+            = link_to 'Show', person_path(person), class: 'btn btn-info'
+            = link_to 'Edit', edit_person_path(person), class: 'btn btn-warning'
+            = link_to 'Destroy', person_path(person), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'
+.row
+  .col-xs-offset-4.col-xs-4
+    = link_to 'New Person', new_person_path, class: 'btn btn-success btn-lg btn-block'
